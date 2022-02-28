@@ -234,7 +234,7 @@
 
 <script>
 
-  import SitePage from '@ui/components/page/site-page.vue'
+  import SitePage from '@/ui/components/page/site-page.vue'
   export default {
     name: 'page-404',
     components: { SitePage }
