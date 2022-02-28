@@ -11,7 +11,7 @@
                 content="Top Right prompts info"
     >
       <el-button type="text" @click="centerDialogVisible = true">
-        Click to open the Dialog
+        Click to open the Dialog {{ x }}
       </el-button>
     </el-tooltip>
 
@@ -63,17 +63,23 @@
 
 </template>
 
+<script setup>
+
+  import SitePage from '@components/page/site-page.vue'
+
+  const x = 'hi'
+
+</script>
+
 <script>
 
   import { ref }            from 'vue'
   import { useNow }         from '@vueuse/core'
   import { ElNotification } from 'element-plus'
 
-  import SitePage from '@components/page/site-page.vue'
 
   export default {
     name:       'main.view',
-    components: { SitePage },
     setup() {
 
       const centerDialogVisible = ref( false )
