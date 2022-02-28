@@ -8,3 +8,4 @@
 - WindiCSS
 - SASS
 - Element Plus UI
+- Iconify Icons
