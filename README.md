@@ -1,10 +1,5 @@
-### Vue 3 Project Boilerplate
+### Groweet Application
 
-> Inside:
+> Description:
 
-- Vue 3
-- Pinia 
-- Vue Router
-- WindiCSS
-- SASS
-- Element Plus UI
+This app will help growers to optimize their efforts to achive better results.
