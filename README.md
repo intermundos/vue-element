@@ -3,8 +3,8 @@
 > Inside:
 
 - Vue 3
-- Vuex
+- Pinia 
 - Vue Router
-- Tailwindcss
+- WindiCSS
 - SASS
 - Element Plus UI
