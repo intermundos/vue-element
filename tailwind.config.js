@@ -5,7 +5,7 @@ import { defineConfig } from 'windicss/helpers'
 // console.log(plugin)
 
 export default defineConfig( {
-  preflight: true,
+  // preflight: true,
   darkMode:  'class',
   important: true,
   plugins:   [

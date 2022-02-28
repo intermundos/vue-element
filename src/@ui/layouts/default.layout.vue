@@ -1,19 +1,26 @@
 <style scoped lang="scss">
 
+  .layout {
+    min-height: 100vh;
+  }
 
 </style>
 
 <template>
 
-    <header class="">
-      <router-link to="/">Home</router-link>
-    </header>
+    <div class="layout">
 
-    <router-view v-slot="{ Component, route }">
-      <main :class="[route.name]">
-        <component :is="Component" :class="[route.meta.classes]" />
-      </main>
-    </router-view>
+      <header class="">
+        <router-link to="/">Home</router-link>
+      </header>
+
+      <router-view v-slot="{ Component, route }">
+        <main>
+          <component :is="Component" :class="[route.meta.classes]" />
+        </main>
+      </router-view>
+
+    </div>
 
 </template>
 

@@ -4,7 +4,7 @@
 
 <template>
 
-  <site-page>
+  <site-page class="home-page">
 
     <el-tooltip class="box-item"
                 effect="light"
