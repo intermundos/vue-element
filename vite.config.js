@@ -1,5 +1,6 @@
 import paths                   from './config/paths.js'
 import vue                     from '@vitejs/plugin-vue'
+import Inspect                 from 'vite-plugin-inspect'
 import WindiCSS                from 'vite-plugin-windicss'
 import ElementPlus             from 'unplugin-element-plus/vite'
 import AutoImport              from 'unplugin-auto-import/vite'
@@ -7,9 +8,14 @@ import Components              from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Icons                   from 'unplugin-icons/vite'
 import IconsResolver           from 'unplugin-icons/resolver'
-import VueI18n                 from '@intlify/vite-plugin-vue-i18n'
+import VueI18n                 from '@intlify/vite-plugin-vue-i18n' // TODO add i18n
 import Pages                   from 'vite-plugin-pages'
 import Layouts                 from 'vite-plugin-vue-layouts'
+
+const elementResolver = ElementPlusResolver( {
+  importStyle: 'sass',
+  ssr:         true,
+} )
 
 /**
  * https://vitejs.dev/config/
@@ -35,6 +41,7 @@ export default {
     formatting: 'minify',
   },
   plugins:    [
+
     vue(),
 
     Pages( {
@@ -43,14 +50,15 @@ export default {
     } ),
 
     Layouts( {
-      layoutsDirs: 'src/ui/layouts',
+      layoutsDirs:   'src/ui/layouts',
+      defaultLayout: 'default'
     } ),
 
-    // VueI18n({
-    //   runtimeOnly: true,
-    //   compositionOnly: true,
-    //   include: [path.resolve(__dirname, 'locales/**')],
-    // }),
+    VueI18n( {
+      runtimeOnly:     true,
+      compositionOnly: true,
+      // include:         `${ paths.ROOT }/src/core/i18n/locales/**`,
+    } ),
 
     ElementPlus( {
       useSource: true,
@@ -63,7 +71,9 @@ export default {
         '@vueuse/head',
         '@vueuse/core',
       ],
-      resolvers: [ ElementPlusResolver( { importStyle: 'sass' } ) ],
+      resolvers: [
+        ElementPlusResolver( { importStyle: 'sass' } )
+      ],
       dts:       'src/auto-imports.d.ts',
     } ),
 
@@ -71,16 +81,36 @@ export default {
       dirs:       [ 'src/ui/components' ],
       extensions: [ 'vue' ],
       deep:       true,
-      resolvers:  [
-        ElementPlusResolver( { importStyle: 'sass' } ),
+      // include:    [ /\.vue$/, /\.vue\?vue/ ],
+      // exclude:    [ /[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/ ],
+      resolvers: [
+        ElementPlusResolver( {
+          importStyle: 'sass',
+        } ),
         IconsResolver( { prefix: 'icon' } ),
       ],
-      dts:        'src/components.d.ts',
+      dts:       'src/components.d.ts',
     } ),
 
     WindiCSS(),
 
     Icons( { compiler: 'vue3' } ),
+
+    {
+      name: 'remove-swiper',
+      transform( code, id, options ) {
+
+        if ( options?.ssr ) {
+          let regex = /import .element-plus\/theme-chalk\/src\/.*$.scss/
+          // let regex = /import .element-plus\/theme-chalk\/src\/.*$.scss/
+          // return code.replace(/import .swiper\/(s?css|less).*$/gm, '')
+          return code.replace( regex, 'hui' )
+
+        }
+      },
+    },
+
+    // Inspect()
   ],
 
 }

@@ -40,6 +40,7 @@ function makeAliasForVite() {
 }
 
 module.exports = {
+  ROOT,
   paths,
   makeAliasForVite,
   makeAliasForWebpack

@@ -6,14 +6,9 @@
 
   <site-page>
 
-    Home
-
-    <el-button type="primary">Click</el-button>
-
-    <el-skeleton :loading="true" animated class="w-400px px-10px"/>
-
-    <el-date-picker type="date" placeholder="Pick a day" />
-
+    <el-button type="primary">
+      Click
+    </el-button>
 
   </site-page>
 

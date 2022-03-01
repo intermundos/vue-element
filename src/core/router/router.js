@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createWebHistory } from 'vue-router'
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 
 const routes = setupLayouts(generatedRoutes)
 
-const router = createRouter({
+const router = {
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
@@ -14,6 +14,6 @@ const router = createRouter({
       return { top: 0 }
     }
   }
-})
+}
 
-export { router }
+export { router, routes }

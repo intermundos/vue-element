@@ -5,8 +5,6 @@
 declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
-    ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     Modal: typeof import('./ui/components/modal.vue')['default']
     SitePage: typeof import('./ui/components/page/site-page.vue')['default']
   }
