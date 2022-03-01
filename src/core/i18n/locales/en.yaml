@@ -1,0 +1,4 @@
+button:
+  default: Click
+heading:
+  home: Hello, world!

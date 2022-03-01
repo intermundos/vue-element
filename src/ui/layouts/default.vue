@@ -12,6 +12,7 @@
 
       <header class="">
         <router-link to="/">Home</router-link>
+        <router-link to="/main">Main</router-link>
       </header>
 
       <router-view v-slot="{ Component, route }">

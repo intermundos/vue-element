@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:ssg": "vite-ssg build",
     "serve": "vite preview",
     "dessys": "npx windicss-analysis"
   },
   "dependencies": {
     "@vueuse/core": "7.7.0",
+    "@vueuse/head": "0.7.5",
     "date-fns": "^2.28.0",
     "element-plus": "2.0.3",
     "lodash": "^4.17.20",
@@ -18,8 +20,10 @@
     "vue-router": "^4.0.6"
   },
   "devDependencies": {
+    "@iconify-json/carbon": "1.1.1",
     "@iconify-json/mdi": "1.1.0",
     "@iconify-json/tabler": "1.1.1",
+    "@intlify/vite-plugin-vue-i18n": "3.3.1",
     "@vitejs/plugin-vue": "^2.2.2",
     "@vue/compiler-sfc": "^3.2.31",
     "@windicss/plugin-question-mark": "0.1.1",
@@ -31,7 +35,13 @@
     "unplugin-icons": "0.13.2",
     "unplugin-vue-components": "0.17.21",
     "vite": "^2.8.4",
+    "vite-plugin-inspect": "0.4.3",
+    "vite-plugin-pages": "0.21.0",
+    "vite-plugin-ssr": "0.3.60-beta.4",
+    "vite-plugin-vue-layouts": "0.6.0",
     "vite-plugin-windicss": "^1.8.1",
+    "vite-ssg": "0.17.10",
+    "vue-i18n": "9.1.9",
     "windicss": "3.5.0"
   }
 }

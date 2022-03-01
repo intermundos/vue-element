@@ -5,13 +5,13 @@ const ROOT = process.cwd()
 const paths = {
   '@config':     'config',
   '@':           'src',
-  '@assets':     'src/@assets',
-  '@core':       'src/@core',
-  '@modules':    'src/@modules',
-  '@ui':         'src/@ui',
-  '@components': 'src/@ui/components',
-  '@views':      'src/@ui/views',
-  '@layouts':    'src/@ui/layouts',
+  '@assets':     'src/assets',
+  '@core':       'src/core',
+  '@modules':    'src/modules',
+  '@ui':         'src/ui',
+  '@components': 'src/ui/components',
+  '@views':      'src/ui/views',
+  '@layouts':    'src/ui/layouts',
 }
 
 /**
@@ -40,6 +40,7 @@ function makeAliasForVite() {
 }
 
 module.exports = {
+  ROOT,
   paths,
   makeAliasForVite,
   makeAliasForWebpack
