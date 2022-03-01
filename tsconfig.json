@@ -22,9 +22,16 @@
       "vite-plugin-vue-layouts/client"
     ],
     "paths": {
-      "~/*": [
-        "src/*"
-      ]
+      "@config/*": ["config/*"],
+      "@/*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@core/*": ["src/core/*"],
+      "@utils/*": ["src/core/utils/*"],
+      "@modules/*": ["src/modules/*"],
+      "@ui/*": ["src/ui/*"],
+      "@components/*": ["src/components/*"],
+      "@views/*": ["src/views/*"],
+      "@layouts/*": ["src/layouts/*"],
     }
   },
   "exclude": [

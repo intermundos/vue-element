@@ -7,6 +7,7 @@ const paths = {
   '@':           'src',
   '@assets':     'src/assets',
   '@core':       'src/core',
+  '@utils':       'src/core/utils',
   '@modules':    'src/modules',
   '@ui':         'src/ui',
   '@components': 'src/ui/components',
