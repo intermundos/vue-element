@@ -4,11 +4,11 @@
 
 <template>
 
-  <section class="page">
+  <main class="page">
 
     <slot></slot>
 
-  </section>
+  </main>
 
 </template>
 

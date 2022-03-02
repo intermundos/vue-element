@@ -14,11 +14,11 @@
 
 </template>
 
-
 <script>
 
   export default {
-    name:       'index.view',
+    name: 'home.view',
   }
 
 </script>
+

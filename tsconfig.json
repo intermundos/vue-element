@@ -8,13 +8,13 @@
       "ESNext"
     ],
     "strict": true,
+    "allowJs": true,
     "esModuleInterop": true,
     "incremental": false,
     "skipLibCheck": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noUnusedLocals": true,
-    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "types": [
       "vite/client",
@@ -31,9 +31,12 @@
       "@ui/*": ["src/ui/*"],
       "@components/*": ["src/components/*"],
       "@views/*": ["src/views/*"],
-      "@layouts/*": ["src/layouts/*"],
+      "@layouts/*": ["src/layouts/*"]
     }
   },
+  "include": [
+    "./src"
+  ],
   "exclude": [
     "dist",
     "node_modules",

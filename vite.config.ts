@@ -1,6 +1,6 @@
+// @ts-ignore
 import paths                   from './config/paths.js'
 import vue                     from '@vitejs/plugin-vue'
-import Inspect                 from 'vite-plugin-inspect'
 import WindiCSS                from 'vite-plugin-windicss'
 import ElementPlus             from 'unplugin-element-plus/vite'
 import AutoImport              from 'unplugin-auto-import/vite'
@@ -9,13 +9,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Icons                   from 'unplugin-icons/vite'
 import IconsResolver           from 'unplugin-icons/resolver'
 import VueI18n                 from '@intlify/vite-plugin-vue-i18n' // TODO add i18n
-import Pages                   from 'vite-plugin-pages'
-import Layouts                 from 'vite-plugin-vue-layouts'
-
-const elementResolver = ElementPlusResolver( {
-  importStyle: 'sass',
-  ssr:         true,
-} )
 
 /**
  * https://vitejs.dev/config/
@@ -36,23 +29,9 @@ export default {
   resolve:    {
     alias: paths.makeAliasForVite()
   },
-  ssgOptions: {
-    script:     'async',
-    formatting: 'minify',
-  },
   plugins:    [
 
     vue(),
-
-    Pages( {
-      dirs:    'src/ui/views',
-      exclude: [ '**/components/*.vue' ],
-    } ),
-
-    Layouts( {
-      layoutsDirs:   'src/ui/layouts',
-      defaultLayout: 'default'
-    } ),
 
     VueI18n( {
       runtimeOnly:     true,
@@ -96,21 +75,6 @@ export default {
 
     Icons( { compiler: 'vue3' } ),
 
-    {
-      name: 'remove-swiper',
-      transform( code, id, options ) {
-
-        if ( options?.ssr ) {
-          let regex = /import .element-plus\/theme-chalk\/src\/.*$.scss/
-          // let regex = /import .element-plus\/theme-chalk\/src\/.*$.scss/
-          // return code.replace(/import .swiper\/(s?css|less).*$/gm, '')
-          return code.replace( regex, 'hui' )
-
-        }
-      },
-    },
-
-    // Inspect()
   ],
 
 }
