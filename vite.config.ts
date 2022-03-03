@@ -15,26 +15,26 @@ import VueI18n                 from '@intlify/vite-plugin-vue-i18n' // TODO add 
  * @type {import('vite').UserConfig}
  */
 export default {
-  css:        {
+  css    : {
     preprocessorOptions: {
       scss: {
         additionalData: `@use "@assets/styles/element/index.scss" as *;`,
       },
     },
   },
-  server:     {
+  server : {
     port: process.env.PORT || 5555,
     open: false
   },
-  resolve:    {
+  resolve: {
     alias: paths.makeAliasForVite()
   },
-  plugins:    [
+  plugins: [
 
     vue(),
 
     VueI18n( {
-      runtimeOnly:     true,
+      runtimeOnly    : true,
       compositionOnly: true,
       // include:         `${ paths.ROOT }/src/core/i18n/locales/**`,
     } ),
@@ -44,22 +44,26 @@ export default {
     } ),
 
     AutoImport( {
-      imports:   [
+      include  : [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/, /\.vue\?vue/, // .vue
+      ],
+      imports  : [
         'vue',
         'vue-i18n',
         '@vueuse/head',
         '@vueuse/core',
       ],
       resolvers: [
-        ElementPlusResolver( { importStyle: 'sass' } )
+        ElementPlusResolver( { importStyle: 'sass' } ),
       ],
-      dts:       'src/auto-imports.d.ts',
+      dts      : 'src/auto-imports.d.ts',
     } ),
 
     Components( {
-      dirs:       [ 'src/ui/components' ],
+      dirs      : [ 'src/ui/components' ],
       extensions: [ 'vue' ],
-      deep:       true,
+      deep      : true,
       // include:    [ /\.vue$/, /\.vue\?vue/ ],
       // exclude:    [ /[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/ ],
       resolvers: [
@@ -68,7 +72,7 @@ export default {
         } ),
         IconsResolver( { prefix: 'icon' } ),
       ],
-      dts:       'src/components.d.ts',
+      dts      : 'src/components.d.ts',
     } ),
 
     WindiCSS(),
