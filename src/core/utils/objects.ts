@@ -10,8 +10,8 @@ function sumObjectsByKey( ...objs ) {
   }, {} )
 }
 
-function sortObject( o: Record<string, any> ) {
-  return Object.keys( o ).sort().reduce( ( r, k ) => ( r[ k ] = o[ k ] ) as any, {} )
+function sortObjectByKey( o: Record<string, any> ) {
+  return Object.keys( o ).sort().reduce( ( r, k ) => ( r[ k ] = o[ k ] ,r ) as any, {} )
 }
 
 function getObjectDiff( obj1, obj2 ) {
@@ -48,5 +48,5 @@ function flattenObject( obj ) {
   return flattenKeys
 }
 
-export { flattenObject, isAllValuesZero, sortObject, sumObjectsByKey, getObjectDiff }
+export { flattenObject, isAllValuesZero, sortObjectByKey, sumObjectsByKey, getObjectDiff }
 export { pick, omit, isEqual, forIn, mapValues, cloneDeep, get, set } from 'lodash'
