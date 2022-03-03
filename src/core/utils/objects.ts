@@ -10,7 +10,7 @@ function sumObjectsByKey( ...objs ) {
   }, {} )
 }
 
-function sortObjectByKey( o: Record<string, any> ) {
+function sortObjectByKey( o ) {
   return Object.keys( o ).sort().reduce( ( r, k ) => ( r[ k ] = o[ k ] ,r ) as any, {} )
 }
 
