@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const defaultLayout = () => import(( `@layouts/default.layout.vue` ))
+const defaultLayout = () => import( `@layouts/default.layout.vue` )
 
 const routes = [
 
@@ -11,7 +11,7 @@ const routes = [
       {
         path:      '',
         name:      'home',
-        component: () => import(( `@views/home/home.view.vue` )),
+        component: () => import( `@views/home/home.view.vue` ),
         meta:      {}
       },
     ],
@@ -23,7 +23,7 @@ const routes = [
   {
     path:      '/:pathMatch(.*)*',
     name:      'not-found',
-    component: () => import(( `@views/service-views/404.vue` ))
+    component: () => import( `@views/service-views/404.vue` )
   },
 ]
 

@@ -8,18 +8,20 @@ publish = "public" # The path to your static content folder
 functions = "netlify/functions"
 autoLaunch = false
 
+[functions]
+external_node_modules = ["keyv"]
 
 [build]
 publish = "dist"
 command = "yarn build"
 NODE_VERSION = "16.13.0"
 
-#[[redirects]]
-#  from = "/gate/*"
-#  to = "/.netlify/functions/:splat"
-#  status = 301
-#  query = {path = ":path"} # apply this rule for /?path=example
-#  force = true
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200
+#query = { path = ":path" } # apply this rule for /?path=example
+#force = true
 
 
 ## The following redirect is intended for use with most SPA's that handles routing internally.
