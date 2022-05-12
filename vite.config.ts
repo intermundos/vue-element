@@ -1,5 +1,5 @@
 // @ts-ignore
-import paths                   from 'config/paths.js'
+import paths                   from './config/paths.js'
 import vue                     from '@vitejs/plugin-vue'
 import WindiCSS                from 'vite-plugin-windicss'
 import AutoImport              from 'unplugin-auto-import/vite'
@@ -129,14 +129,6 @@ export default {
         manualChunks  : chunksMap,
       },
     },
-    terserOptions: {
-      compress: {
-        drop_console: true
-      },
-      format  : {
-        comments: false
-      }
-    }
   },
   optimizeDeps: {
     entries: [ './src/main.ts' ],

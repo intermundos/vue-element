@@ -1,6 +1,4 @@
-import 'virtual:windi.css'
-import 'virtual:windi-devtools'
-import '@assets/styles/main.scss'
+import '@assets'
 import { createApp } from 'vue'
 import { router }    from '@core/router'
 import App           from '@/App.vue'

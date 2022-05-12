@@ -1,0 +1,26 @@
+$color: #ff3a64;
+
+[id='v-progressbar'] {
+  pointer-events: none;
+
+  .v-p-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: $color;
+    z-index: 1031;
+  }
+
+  .v-p-peg {
+    display: block;
+    position: absolute;
+    right: 0;
+    width: 100px;
+    height: 100%;
+    box-shadow: 0 0 10px $color, 0 0 5px $color;
+    opacity: 1;
+    transform: rotate(3deg) translate(0px, -4px);
+  }
+}
