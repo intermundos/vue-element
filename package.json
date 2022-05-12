@@ -10,10 +10,14 @@
     "dessys": "npx windicss-analysis"
   },
   "dependencies": {
+    "@jambonn/vue-next-progressbar": "0.1.4",
+    "@netlify/functions": "1.0.0",
     "@vueuse/core": "7.7.0",
     "@vueuse/head": "0.7.5",
     "date-fns": "^2.28.0",
     "element-plus": "2.0.3",
+    "ky": "0.30.0",
+    "localforage": "1.10.0",
     "lodash": "^4.17.20",
     "mitt": "3.0.0",
     "pinia": "^2.0.11",
@@ -29,6 +33,7 @@
     "@types/node": "17.0.21",
     "@vitejs/plugin-vue": "^2.2.2",
     "@vue/compiler-sfc": "^3.2.31",
+    "@windicss/plugin-heropatterns": "0.0.8",
     "@windicss/plugin-question-mark": "0.1.1",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.7",

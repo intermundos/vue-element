@@ -1,47 +1,71 @@
 // @ts-ignore
-import paths                   from './config/paths.js'
+import paths                   from 'config/paths.js'
 import vue                     from '@vitejs/plugin-vue'
 import WindiCSS                from 'vite-plugin-windicss'
-import ElementPlus             from 'unplugin-element-plus/vite'
 import AutoImport              from 'unplugin-auto-import/vite'
 import Components              from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Icons                   from 'unplugin-icons/vite'
 import IconsResolver           from 'unplugin-icons/resolver'
-import VueI18n                 from '@intlify/vite-plugin-vue-i18n' // TODO add i18n
+// import ElementPlus             from 'unplugin-element-plus/vite'
+// import VueI18n                 from '@intlify/vite-plugin-vue-i18n' // TODO add i18n
+
+const esbuild = {} as Record<string, any>
+
+if ( process.env.NODE_ENV === 'production' ) {
+  esbuild.drop = [ 'console' ]
+}
+
+const chunksMap = {
+  core   : [ 'vue', 'vue-router', 'pinia' ],
+  utils  : [ 'lodash', 'date-fns', 'ky' ],
+  storage: [ 'localforage' ],
+}
 
 /**
  * https://vitejs.dev/config/
  * @type {import('vite').UserConfig}
  */
 export default {
-  css    : {
+  css         : {
     preprocessorOptions: {
       scss: {
+        charset       : false,
         additionalData: `@use "@assets/styles/element/index.scss" as *;`,
       },
     },
   },
-  server : {
-    port: process.env.PORT || 5555,
-    open: false
+  server      : {
+    port : Number( process.env.PORT ) || 8888,
+    open : false,
+    proxy: {
+      '/api': {
+        target      : 'http://localhost:5555/.netlify/functions',
+        changeOrigin: true,
+        rewrite     : path => path.replace( /^\/api/, '' ),
+      },
+    },
   },
-  resolve: {
+  preview     : {
+    port: 8080
+  },
+  resolve     : {
     alias: paths.makeAliasForVite()
   },
-  plugins: [
+  plugins     : [
 
     vue(),
 
-    VueI18n( {
-      runtimeOnly    : true,
-      compositionOnly: true,
-      // include:         `${ paths.ROOT }/src/core/i18n/locales/**`,
-    } ),
+    // VueI18n( {
+    //   fullInstall    : true,
+    //   runtimeOnly    : false,
+    //   compositionOnly: true,
+    //   // include:         `${ paths.ROOT }/src/core/i18n/locales/**`,
+    // } ),
 
-    ElementPlus( {
-      useSource: true,
-    } ),
+    // ElementPlus( {
+    //   useSource: true,
+    // } ),
 
     AutoImport( {
       include  : [
@@ -53,6 +77,16 @@ export default {
         'vue-i18n',
         '@vueuse/head',
         '@vueuse/core',
+        {
+          '@core/config': [
+            'config',
+          ]
+        },
+        {
+          '@core/utils': [
+            'utils',
+          ]
+        },
       ],
       resolvers: [
         ElementPlusResolver( { importStyle: 'sass' } ),
@@ -61,18 +95,16 @@ export default {
     } ),
 
     Components( {
-      dirs      : [ 'src/ui/components' ],
+      dirs      : [ 'src/ui/components', 'src/ui/views' ],
       extensions: [ 'vue' ],
       deep      : true,
-      // include:    [ /\.vue$/, /\.vue\?vue/ ],
-      // exclude:    [ /[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/ ],
-      resolvers: [
-        ElementPlusResolver( {
-          importStyle: 'sass',
-        } ),
+      include   : [ /\.vue$/, /\.vue\?vue/ ],
+      exclude   : [ /[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/, /[\\/]\.view.vue[\\/]/ ],
+      resolvers : [
+        ElementPlusResolver( { importStyle: 'sass' } ),
         IconsResolver( { prefix: 'icon' } ),
       ],
-      dts      : 'src/components.d.ts',
+      dts       : 'src/components.d.ts',
     } ),
 
     WindiCSS(),
@@ -80,5 +112,35 @@ export default {
     Icons( { compiler: 'vue3' } ),
 
   ],
+  esbuild     : esbuild,
+  build       : {
+    sourcemap    : false,
+    rollupOptions: {
+      output: {
+        assetFileNames: ( chunk ) => {
+          return 'assets/[hash][extname]'
+        },
+        chunkFileNames: ( chunk ) => {
+          if ( chunk.name.includes( '.view' ) ) {
+            return '[name].[hash].js'
+          }
+          return '[hash].js'
+        },
+        manualChunks  : chunksMap,
+      },
+    },
+    terserOptions: {
+      compress: {
+        drop_console: true
+      },
+      format  : {
+        comments: false
+      }
+    }
+  },
+  optimizeDeps: {
+    entries: [ './src/main.ts' ],
+    include: [ 'lodash' ]
+  }
 
 }
